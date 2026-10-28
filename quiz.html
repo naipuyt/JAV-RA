@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>JAVÈRA - Cultural Quiz</title>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="css/style.css"/>
+  <link rel="icon" type="image/png" href="assets/images/favicon.png"/>
+
+</head>
+
+<body>
+
+  <!-- Navbar -->
+  <nav class="navbar-wrapper">
+    <div class="navbar-capsule">
+      <a href="index.html" class="nav-item">Home</a>
+      <a href="explore.html" class="nav-item">Explore</a>
+      <a href="collection.html" class="nav-item">Collection</a>
+      <a href="exhibition.html" class="nav-item">Art Exhibition</a>
+      <a href="quiz.html" class="nav-item active">Cultural Quiz</a>
+    </div>
+  </nav>
+
+  <main class="quiz-section">
+
+    <!-- Hero -->
+    <section class="quiz-hero">
+      <h1 class="quiz-title">How Well Do You Know Nusantara</h1>
+      <p class="quiz-description">
+        Look closer, make connections, and discover something new. A small interactive journey through Indonesia's rich creative heritage.
+      </p>
+      <div class="quiz-divider"></div>
+    </section>
+
+    <div class="quiz-container" id="quizContainer">
+    </div>
+
+    <div class="collection-ornament">
+      <svg viewBox="0 0 430 520" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <path id="outer-lobe" fill="#D4A349" d="M -13,-13 C -20,-26 -14,-40 0,-50 C 14,-40 20,-26 13,-13 L 9,-17 C 12,-25 9,-34 0,-41 C -9,-34 -12,-25 -9,-17 Z"/>
+          <path id="inner-seed" fill="#D4A349" d="M 0,-7 C 4.5,-12 4.5,-21 0,-26 C -4.5,-21 -4.5,-12 0,-7 Z"/>
+          <path id="star-petal" fill="#D4A349" d="M 0,-11 C 5.5,-17 5.5,-29 0,-37 C -5.5,-29 -5.5,-17 0,-11 Z"/>
+          <g id="batik-flower">
+            <use href="#outer-lobe"/><use href="#outer-lobe" transform="rotate(90)"/><use href="#outer-lobe" transform="rotate(180)"/><use href="#outer-lobe" transform="rotate(270)"/>
+            <path fill="#D4A349" d="M -13,-13 L 0,-16 L 13,-13 L 9,-17 L 0,-13.5 L -9,-17 Z M 13,-13 L 16,0 L 13,13 L 17,9 L 13.5,0 L 17,-9 Z M 13,13 L 0,16 L -13,13 L -9,17 L 0,13.5 L 9,17 Z M -13,13 L -16,0 L -13,-13 L -17,-9 L -13.5,0 L -17,9 Z"/>
+            <use href="#inner-seed"/><use href="#inner-seed" transform="rotate(90)"/><use href="#inner-seed" transform="rotate(180)"/><use href="#inner-seed" transform="rotate(270)"/>
+            <circle cx="0" cy="0" r="4.5" fill="#D4A349"/>
+          </g>
+          <g id="batik-star">
+            <use href="#star-petal"/><use href="#star-petal" transform="rotate(45)"/><use href="#star-petal" transform="rotate(90)"/><use href="#star-petal" transform="rotate(135)"/><use href="#star-petal" transform="rotate(180)"/><use href="#star-petal" transform="rotate(225)"/><use href="#star-petal" transform="rotate(270)"/><use href="#star-petal" transform="rotate(315)"/>
+            <circle cx="0" cy="0" r="7.5" fill="#D4A349"/>
+          </g>
+        </defs>
+        <use href="#batik-flower" x="60" y="60"/><use href="#batik-star" x="110" y="110"/><use href="#batik-flower" x="60" y="160"/><use href="#batik-flower" x="160" y="160"/><use href="#batik-star" x="110" y="210"/><use href="#batik-flower" x="60" y="260"/><use href="#batik-flower" x="160" y="260"/><use href="#batik-star" x="110" y="310"/><use href="#batik-star" x="210" y="310"/><use href="#batik-flower" x="60" y="360"/><use href="#batik-flower" x="160" y="360"/><use href="#batik-flower" x="260" y="360"/><use href="#batik-star" x="110" y="410"/><use href="#batik-star" x="210" y="410"/><use href="#batik-star" x="310" y="410"/><use href="#batik-flower" x="60" y="460"/><use href="#batik-flower" x="160" y="460"/><use href="#batik-flower" x="260" y="460"/><use href="#batik-flower" x="360" y="460"/>
+      </svg>
+    </div>
+
+  </main>
+  <footer class="main-footer collection-footer">
+    <div class="footer-overlay"></div>
+    <div class="footer-content">
+      <div class="footer-brand">
+        <span class="footer-tag">A Digital Museum of Java Island</span>
+        <h3 class="footer-title">Where Culture Lives Forever</h3>
+        <p class="footer-desc">
+          A digital journey through Indonesia's art, heritage, and the stories that connect generations.
+        </p>
+      </div>
+      <div class="footer-copyright">
+        <p>&copy; 2026 JAVÈRA. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const quizData = [
+      {
+        question: "Which art form uses wax-resist dyeing to create intricate patterns?",
+        options: ["A. Wayang Kulit", "B. Batik", "C. Angklung", "D. Reog Ponorogo"],
+        answer: "B. Batik"
+      },
+      {
+        question: "Where does Reog Ponorogo originate from?",
+        options: ["A. Central Java", "B. West Java", "C. East Java", "D. Yogyakarta"],
+        answer: "C. East Java"
+      },
+      {
+        question: "What materials are used to make an angklung?",
+        options: ["A. Bamboo and rattan", "B. Wood and leather", "C. Bronze and brass", "D. Fabric and wax"],
+        answer: "A. Bamboo and rattan"
+      }
+    ];
+
+    let currentQuestionIndex = 0;
+    let score = 0;
+    let isAnswered = false;
+
+    const quizContainer = document.getElementById("quizContainer");
+
+    function loadQuiz() {
+      isAnswered = false;
+      if (currentQuestionIndex < quizData.length) {
+        const q = quizData[currentQuestionIndex];
+        const stepNum = String(currentQuestionIndex + 1).padStart(2, '0');
+        const totalNum = String(quizData.length).padStart(2, '0');
+
+        quizContainer.innerHTML = `
+          <span class="quiz-step-indicator">Question ${stepNum}/${totalNum}</span>
+          <h2 class="quiz-question-text">${q.question}</h2>
+          <div class="quiz-options-grid">
+            ${q.options.map(opt => `<button class="quiz-option-btn" onclick="checkAnswer(this, '${opt}')">${opt}</button>`).join('')}
+          </div>
+        `;
+      } else {
+        showResults();
+      }
+    }
+
+    function checkAnswer(button, selectedOption) {
+      if (isAnswered) return;
+      isAnswered = true;
+
+      const q = quizData[currentQuestionIndex];
+      const allButtons = quizContainer.querySelectorAll(".quiz-option-btn");
+
+      if (selectedOption === q.answer) {
+        button.classList.add("correct");
+        score++;
+      } else {
+        button.classList.add("wrong");
+        allButtons.forEach(btn => {
+          if (btn.textContent === q.answer) {
+            btn.classList.add("correct");
+          }
+        });
+      }
+
+      setTimeout(() => {
+        currentQuestionIndex++;
+        loadQuiz();
+      }, 1200);
+    }
+
+    function showResults() {
+      quizContainer.innerHTML = `
+        <div class="quiz-result-card">
+          <h3>Quiz Completed!</h3>
+          <p style="color: #cfbeaf; font-size: 0.9rem; margin-bottom: 10px;">Your Final Score</p>
+          <div class="quiz-result-score">${score} / ${quizData.length}</div>
+          <p class="quiz-result-desc">
+            ${score === quizData.length ? "Amazing! You have a profound knowledge of Nusantara's rich cultural heritage." : "Great effort! Explore our collection to learn more about Indonesia's arts and traditions."}
+          </p>
+          <button class="redo-quiz-btn" onclick="restartQuiz()">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M23 4v6h-6"></path>
+              <path d="M1 20v-6h6"></path>
+              <path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"></path>
+            </svg>
+            Redoing the Quiz
+          </button>
+        </div>
+      `;
+    }
+
+    function restartQuiz() {
+      currentQuestionIndex = 0;
+      score = 0;
+      loadQuiz();
+    }
+
+    document.addEventListener("DOMContentLoaded", loadQuiz);
+  </script>
+
+</body>
+</html>
