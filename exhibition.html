@@ -1,0 +1,534 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>JAVÈRA - Art Exhibition</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+
+<body>
+
+  <nav class="navbar-wrapper">
+    <div class="navbar-capsule">
+      <a href="index.html" class="nav-item">Home</a>
+      <a href="explore.html" class="nav-item">Explore</a>
+      <a href="collection.html" class="nav-item">Collection</a>
+      <a href="exhibition.html" class="nav-item active">Art Exhibition</a>
+      <a href="quiz.html" class="nav-item">Cultural Quiz</a>
+    </div>
+  </nav>
+
+  <main class="collection-section">
+
+    <section class="collection-hero">
+      <h1 class="collection-title">A Stage for Every Story</h1>
+
+      <p class="collection-description">
+        Step into a world of exhibitions where art, tradition, and contemporary culture meet to tell the
+        stories of Java.
+      </p>
+
+      <div class="collection-divider"></div>
+    </section>
+
+    <section class="collection-filter">
+      <button class="filter-btn active" data-filter="all">All Event</button>
+      <button class="filter-btn" data-filter="exhibition">Exhibition</button>
+      <button class="filter-btn" data-filter="performances">Performances</button>
+      <button class="filter-btn" data-filter="workshops">Workshops</button>
+      <button class="filter-btn" data-filter="festivals">Festivals</button>
+      <button class="filter-btn" data-filter="favorite">Event To Do</button>
+    </section>
+
+    <section class="exhibition-grid" id="exhibitionGrid">
+
+      <article class="artwork-card"
+               data-category="exhibition"
+               data-subtitle="BAIK Jakarta is pleased to present Ambang / Threshold, a solo exhibition by FX Harsono"
+               data-about="BAIK Jakarta is pleased to present Ambang / Threshold, a solo exhibition by FX Harsono. Focusing on the ambivalent position of the Chinese-Indonesian community, Harsono revisits the icons, symbols, and metaphors recurred in his works from the mid-1970s, engaging them through new approaches with meanings that are still as relevant as ever."
+               data-location="Jakarta"
+               data-artist="FX Harsono">
+        <div class="artwork-image">
+          <img src="assets/images/exhibition-img.svg" onerror="this.src='assets/images/collection-img.svg'" alt="Ambang Threshold">
+        </div>
+        <div class="artwork-info">
+          <div class="artwork-meta">
+            <span class="meta-category">Exhibition</span>
+            <span class="meta-region">Jakarta</span>
+          </div>
+          <h3>Ambang Threshold</h3>
+          <p>
+            BAIK Jakarta is pleased to present Ambang / Threshold, a solo
+            exhibition by FX Harsono
+          </p>
+          <div class="artwork-footer">
+            <a href="#" class="story-link">Explore Event ↗</a>
+            <button class="favorite-btn" aria-label="Save to my event to do">
+              <svg viewBox="0 0 24 24" fill="none">
+                <path d="M20.8 8.8C20.8 13.2 12 19 12 19S3.2 13.2 3.2 8.8C3.2 4.5 8.5 3.2 12 7C15.5 3.2 20.8 4.5 20.8 8.8Z"
+                      stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </button>
+          </div>
+        </div>
+      </article>
+
+      <article class="artwork-card"
+               data-category="exhibition"
+               data-subtitle="BAIK Jakarta is pleased to present Ambang / Threshold, a solo exhibition by FX Harsono"
+               data-about="BAIK Jakarta is pleased to present Ambang / Threshold, a solo exhibition by FX Harsono. Focusing on the ambivalent position of the Chinese-Indonesian community, Harsono revisits the icons, symbols, and metaphors recurred in his works from the mid-1970s, engaging them through new approaches with meanings that are still as relevant as ever."
+               data-location="Jakarta"
+               data-artist="FX Harsono">
+        <div class="artwork-image">
+          <img src="assets/images/exhibition-img.svg" onerror="this.src='assets/images/collection-img.svg'" alt="Ambang Threshold">
+        </div>
+        <div class="artwork-info">
+          <div class="artwork-meta">
+            <span class="meta-category">Exhibition</span>
+            <span class="meta-region">Jakarta</span>
+          </div>
+          <h3>Ambang Threshold</h3>
+          <p>
+            BAIK Jakarta is pleased to present Ambang / Threshold, a solo
+            exhibition by FX Harsono
+          </p>
+          <div class="artwork-footer">
+            <a href="#" class="story-link">Explore Event ↗</a>
+            <button class="favorite-btn" aria-label="Save to my event to do">
+              <svg viewBox="0 0 24 24" fill="none">
+                <path d="M20.8 8.8C20.8 13.2 12 19 12 19S3.2 13.2 3.2 8.8C3.2 4.5 8.5 3.2 12 7C15.5 3.2 20.8 4.5 20.8 8.8Z"
+                      stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </button>
+          </div>
+        </div>
+      </article>
+
+      <article class="artwork-card"
+               data-category="exhibition"
+               data-subtitle="BAIK Jakarta is pleased to present Ambang / Threshold, a solo exhibition by FX Harsono"
+               data-about="BAIK Jakarta is pleased to present Ambang / Threshold, a solo exhibition by FX Harsono. Focusing on the ambivalent position of the Chinese-Indonesian community, Harsono revisits the icons, symbols, and metaphors recurred in his works from the mid-1970s, engaging them through new approaches with meanings that are still as relevant as ever."
+               data-location="Jakarta"
+               data-artist="FX Harsono">
+        <div class="artwork-image">
+          <img src="assets/images/exhibition-img.svg" onerror="this.src='assets/images/collection-img.svg'" alt="Ambang Threshold">
+        </div>
+        <div class="artwork-info">
+          <div class="artwork-meta">
+            <span class="meta-category">Exhibition</span>
+            <span class="meta-region">Jakarta</span>
+          </div>
+          <h3>Ambang Threshold</h3>
+          <p>
+            BAIK Jakarta is pleased to present Ambang / Threshold, a solo
+            exhibition by FX Harsono
+          </p>
+          <div class="artwork-footer">
+            <a href="#" class="story-link">Explore Event ↗</a>
+            <button class="favorite-btn" aria-label="Save to my event to do">
+              <svg viewBox="0 0 24 24" fill="none">
+                <path d="M20.8 8.8C20.8 13.2 12 19 12 19S3.2 13.2 3.2 8.8C3.2 4.5 8.5 3.2 12 7C15.5 3.2 20.8 4.5 20.8 8.8Z"
+                      stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </button>
+          </div>
+        </div>
+      </article>
+
+      <article class="artwork-card"
+               data-category="exhibition"
+               data-subtitle="BAIK Jakarta is pleased to present Ambang / Threshold, a solo exhibition by FX Harsono"
+               data-about="BAIK Jakarta is pleased to present Ambang / Threshold, a solo exhibition by FX Harsono. Focusing on the ambivalent position of the Chinese-Indonesian community, Harsono revisits the icons, symbols, and metaphors recurred in his works from the mid-1970s, engaging them through new approaches with meanings that are still as relevant as ever."
+               data-location="Jakarta"
+               data-artist="FX Harsono">
+        <div class="artwork-image">
+          <img src="assets/images/exhibition-img.svg" onerror="this.src='assets/images/collection-img.svg'" alt="Ambang Threshold">
+        </div>
+        <div class="artwork-info">
+          <div class="artwork-meta">
+            <span class="meta-category">Exhibition</span>
+            <span class="meta-region">Jakarta</span>
+          </div>
+          <h3>Ambang Threshold</h3>
+          <p>
+            BAIK Jakarta is pleased to present Ambang / Threshold, a solo
+            exhibition by FX Harsono
+          </p>
+          <div class="artwork-footer">
+            <a href="#" class="story-link">Explore Event ↗</a>
+            <button class="favorite-btn" aria-label="Save to my event to do">
+              <svg viewBox="0 0 24 24" fill="none">
+                <path d="M20.8 8.8C20.8 13.2 12 19 12 19S3.2 13.2 3.2 8.8C3.2 4.5 8.5 3.2 12 7C15.5 3.2 20.8 4.5 20.8 8.8Z"
+                      stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </button>
+          </div>
+        </div>
+      </article>
+
+      <article class="artwork-card"
+               data-category="exhibition"
+               data-subtitle="BAIK Jakarta is pleased to present Ambang / Threshold, a solo exhibition by FX Harsono"
+               data-about="BAIK Jakarta is pleased to present Ambang / Threshold, a solo exhibition by FX Harsono. Focusing on the ambivalent position of the Chinese-Indonesian community, Harsono revisits the icons, symbols, and metaphors recurred in his works from the mid-1970s, engaging them through new approaches with meanings that are still as relevant as ever."
+               data-location="Jakarta"
+               data-artist="FX Harsono">
+        <div class="artwork-image">
+          <img src="assets/images/exhibition-img.svg" onerror="this.src='assets/images/collection-img.svg'" alt="Ambang Threshold">
+        </div>
+        <div class="artwork-info">
+          <div class="artwork-meta">
+            <span class="meta-category">Exhibition</span>
+            <span class="meta-region">Jakarta</span>
+          </div>
+          <h3>Ambang Threshold</h3>
+          <p>
+            BAIK Jakarta is pleased to present Ambang / Threshold, a solo
+            exhibition by FX Harsono
+          </p>
+          <div class="artwork-footer">
+            <a href="#" class="story-link">Explore Event ↗</a>
+            <button class="favorite-btn" aria-label="Save to my event to do">
+              <svg viewBox="0 0 24 24" fill="none">
+                <path d="M20.8 8.8C20.8 13.2 12 19 12 19S3.2 13.2 3.2 8.8C3.2 4.5 8.5 3.2 12 7C15.5 3.2 20.8 4.5 20.8 8.8Z"
+                      stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </button>
+          </div>
+        </div>
+      </article>
+
+      <article class="artwork-card"
+               data-category="exhibition"
+               data-subtitle="BAIK Jakarta is pleased to present Ambang / Threshold, a solo exhibition by FX Harsono"
+               data-about="BAIK Jakarta is pleased to present Ambang / Threshold, a solo exhibition by FX Harsono. Focusing on the ambivalent position of the Chinese-Indonesian community, Harsono revisits the icons, symbols, and metaphors recurred in his works from the mid-1970s, engaging them through new approaches with meanings that are still as relevant as ever."
+               data-location="Jakarta"
+               data-artist="FX Harsono">
+        <div class="artwork-image">
+          <img src="assets/images/exhibition-img.svg" onerror="this.src='assets/images/collection-img.svg'" alt="Ambang Threshold">
+        </div>
+        <div class="artwork-info">
+          <div class="artwork-meta">
+            <span class="meta-category">Exhibition</span>
+            <span class="meta-region">Jakarta</span>
+          </div>
+          <h3>Ambang Threshold</h3>
+          <p>
+            BAIK Jakarta is pleased to present Ambang / Threshold, a solo
+            exhibition by FX Harsono
+          </p>
+          <div class="artwork-footer">
+            <a href="#" class="story-link">Explore Event ↗</a>
+            <button class="favorite-btn" aria-label="Save to my event to do">
+              <svg viewBox="0 0 24 24" fill="none">
+                <path d="M20.8 8.8C20.8 13.2 12 19 12 19S3.2 13.2 3.2 8.8C3.2 4.5 8.5 3.2 12 7C15.5 3.2 20.8 4.5 20.8 8.8Z"
+                      stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </button>
+          </div>
+        </div>
+      </article>
+
+    </section>
+
+    <div class="collection-ornament">
+      <svg viewBox="0 0 430 520" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <path id="outer-lobe" fill="#D4A349" d="
+            M -13,-13
+            C -20,-26 -14,-40 0,-50
+            C 14,-40 20,-26 13,-13
+            L 9,-17
+            C 12,-25 9,-34 0,-41
+            C -9,-34 -12,-25 -9,-17
+            Z
+          "/>
+          <path id="inner-seed" fill="#D4A349" d="
+            M 0,-7
+            C 4.5,-12 4.5,-21 0,-26
+            C -4.5,-21 -4.5,-12 0,-7
+            Z
+          "/>
+          <path id="star-petal" fill="#D4A349" d="
+            M 0,-11
+            C 5.5,-17 5.5,-29 0,-37
+            C -5.5,-29 -5.5,-17 0,-11
+            Z
+          "/>
+
+          <g id="batik-flower">
+            <use href="#outer-lobe"/>
+            <use href="#outer-lobe" transform="rotate(90)"/>
+            <use href="#outer-lobe" transform="rotate(180)"/>
+            <use href="#outer-lobe" transform="rotate(270)"/>
+            <path fill="#D4A349" d="
+              M -13,-13 L 0,-16 L 13,-13 L 9,-17 L 0,-13.5 L -9,-17 Z
+              M 13,-13 L 16,0 L 13,13 L 17,9 L 13.5,0 L 17,-9 Z
+              M 13,13 L 0,16 L -13,13 L -9,17 L 0,13.5 L 9,17 Z
+              M -13,13 L -16,0 L -13,-13 L -17,-9 L -13.5,0 L -17,9 Z
+            "/>
+            <use href="#inner-seed"/>
+            <use href="#inner-seed" transform="rotate(90)"/>
+            <use href="#inner-seed" transform="rotate(180)"/>
+            <use href="#inner-seed" transform="rotate(270)"/>
+            <circle cx="0" cy="0" r="4.5" fill="#D4A349"/>
+          </g>
+
+          <g id="batik-star">
+            <use href="#star-petal"/>
+            <use href="#star-petal" transform="rotate(45)"/>
+            <use href="#star-petal" transform="rotate(90)"/>
+            <use href="#star-petal" transform="rotate(135)"/>
+            <use href="#star-petal" transform="rotate(180)"/>
+            <use href="#star-petal" transform="rotate(225)"/>
+            <use href="#star-petal" transform="rotate(270)"/>
+            <use href="#star-petal" transform="rotate(315)"/>
+            <circle cx="0" cy="0" r="7.5" fill="#D4A349"/>
+          </g>
+        </defs>
+
+        <use href="#batik-flower" x="60" y="60"/>
+        <use href="#batik-star" x="110" y="110"/>
+        <use href="#batik-flower" x="60" y="160"/>
+        <use href="#batik-flower" x="160" y="160"/>
+        <use href="#batik-star" x="110" y="210"/>
+        <use href="#batik-flower" x="60" y="260"/>
+        <use href="#batik-flower" x="160" y="260"/>
+        <use href="#batik-star" x="110" y="310"/>
+        <use href="#batik-star" x="210" y="310"/>
+        <use href="#batik-flower" x="60" y="360"/>
+        <use href="#batik-flower" x="160" y="360"/>
+        <use href="#batik-flower" x="260" y="360"/>
+        <use href="#batik-star" x="110" y="410"/>
+        <use href="#batik-star" x="210" y="410"/>
+        <use href="#batik-star" x="310" y="410"/>
+        <use href="#batik-flower" x="60" y="460"/>
+        <use href="#batik-flower" x="160" y="460"/>
+        <use href="#batik-flower" x="260" y="460"/>
+        <use href="#batik-flower" x="360" y="460"/>
+      </svg>
+    </div>
+
+  </main>
+
+  <div class="story-modal-overlay" id="storyModal" aria-hidden="true">
+    <div class="story-modal-card" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+      
+      <div class="story-modal-image">
+        <img src="assets/images/exhibition-img.svg" onerror="this.src='assets/images/collection-img.svg'" alt="Ambang Threshold" id="modalImg">
+      </div>
+
+      <div class="story-modal-body">
+        <div class="story-modal-top">
+          <div class="story-modal-meta">
+            <span id="modalCategory">Exhibition</span>
+            <span class="meta-dot">•</span>
+            <span id="modalRegion">Jakarta</span>
+          </div>
+
+          <h2 class="story-modal-title" id="modalTitle">Ambang Threshold</h2>
+
+          <p class="story-modal-subtitle" id="modalSubtitle">
+            BAIK Jakarta is pleased to present Ambang / Threshold, a solo exhibition by FX Harsono
+          </p>
+
+          <div class="story-modal-divider"></div>
+
+          <div class="story-modal-section">
+            <h4>About this exhibition</h4>
+            <p id="modalAbout">
+              BAIK Jakarta is pleased to present Ambang / Threshold, a solo exhibition by FX Harsono. Focusing on the ambivalent position of the Chinese-Indonesian community, Harsono revisits the icons, symbols, and metaphors recurred in his works from the mid-1970s, engaging them through new approaches with meanings that are still as relevant as ever.
+            </p>
+          </div>
+
+          <div class="story-modal-section">
+            <h4>Event Information</h4>
+            <ul class="artwork-info-list">
+              <li><strong>Location —</strong> <span id="modalInfoLocation">Jakarta</span></li>
+              <li><strong>Artist —</strong> <span id="modalInfoArtist">FX Harsono</span></li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="story-modal-actions">
+          <button class="modal-save-btn" id="modalSaveBtn" type="button">
+            <svg viewBox="0 0 24 24" fill="none">
+              <path d="M20.8 8.8C20.8 13.2 12 19 12 19S3.2 13.2 3.2 8.8C3.2 4.5 8.5 3.2 12 7C15.5 3.2 20.8 4.5 20.8 8.8Z"
+                    stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            <span id="modalSaveText">SAVE TO MY EVENT TO DO</span>
+          </button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <footer class="main-footer collection-footer">
+    <div class="footer-overlay"></div>
+
+    <div class="footer-content">
+      <div class="footer-brand">
+        <span class="footer-tag">A Digital Museum of Java Island</span>
+        <h3 class="footer-title">Where Culture Lives Forever</h3>
+        <p class="footer-desc">
+          A digital journey through Indonesia's art, heritage,
+          and the stories that connect generations.
+        </p>
+      </div>
+
+      <div class="footer-copyright">
+        <p>&copy; 2026 JAVÈRA. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      const filterButtons = document.querySelectorAll(".filter-btn");
+      const eventCards = document.querySelectorAll(".artwork-card");
+      const storyModal = document.getElementById("storyModal");
+
+      const modalImg = document.getElementById("modalImg");
+      const modalCategory = document.getElementById("modalCategory");
+      const modalRegion = document.getElementById("modalRegion");
+      const modalTitle = document.getElementById("modalTitle");
+      const modalSubtitle = document.getElementById("modalSubtitle");
+      const modalAbout = document.getElementById("modalAbout");
+      const modalInfoLocation = document.getElementById("modalInfoLocation");
+      const modalInfoArtist = document.getElementById("modalInfoArtist");
+      const modalSaveBtn = document.getElementById("modalSaveBtn");
+      const modalSaveText = document.getElementById("modalSaveText");
+
+      let activeCard = null;
+      let currentFilter = "all";
+
+      function applyFilter(filterValue) {
+        currentFilter = filterValue;
+        eventCards.forEach((card) => {
+          const category = card.getAttribute("data-category");
+          const favBtn = card.querySelector(".favorite-btn");
+          const isLiked = favBtn ? favBtn.classList.contains("liked") : false;
+
+          if (filterValue === "all") {
+            card.classList.remove("hidden");
+          } else if (filterValue === "favorite") {
+            card.classList.toggle("hidden", !isLiked);
+          } else {
+            card.classList.toggle("hidden", category !== filterValue);
+          }
+        });
+      }
+
+      filterButtons.forEach((btn) => {
+        btn.addEventListener("click", () => {
+          filterButtons.forEach((b) => b.classList.remove("active"));
+          btn.classList.add("active");
+          applyFilter(btn.getAttribute("data-filter"));
+        });
+      });
+
+      eventCards.forEach((card) => {
+        const favBtn = card.querySelector(".favorite-btn");
+        if (!favBtn) return;
+
+        favBtn.addEventListener("click", (e) => {
+          e.preventDefault();
+          e.stopPropagation();
+          favBtn.classList.toggle("liked");
+
+          if (currentFilter === "favorite") {
+            applyFilter("favorite");
+          }
+        });
+      });
+
+      eventCards.forEach((card) => {
+        const storyLink = card.querySelector(".story-link");
+        if (!storyLink) return;
+
+        storyLink.addEventListener("click", (e) => {
+          e.preventDefault();
+          activeCard = card;
+
+          const imgEl = card.querySelector(".artwork-image img");
+          const metaSpans = card.querySelectorAll(".artwork-meta span");
+          const titleEl = card.querySelector("h3");
+          const descEl = card.querySelector("p");
+          const favBtn = card.querySelector(".favorite-btn");
+
+          const imgSrc = imgEl ? imgEl.getAttribute("src") : "";
+          const imgAlt = imgEl ? imgEl.getAttribute("alt") : "";
+          const category = metaSpans[0] ? metaSpans[0].textContent : "Exhibition";
+          const region = metaSpans[1] ? metaSpans[1].textContent : "Jakarta";
+          const title = titleEl ? titleEl.textContent : "";
+          const defaultDesc = descEl ? descEl.textContent.trim() : "";
+
+          modalImg.src = imgSrc;
+          modalImg.alt = imgAlt;
+          modalCategory.textContent = category;
+          modalRegion.textContent = region;
+          modalTitle.textContent = title;
+          modalSubtitle.textContent = card.getAttribute("data-subtitle") || defaultDesc;
+          modalAbout.textContent = card.getAttribute("data-about") || defaultDesc;
+          modalInfoLocation.textContent = card.getAttribute("data-location") || region;
+          modalInfoArtist.textContent = card.getAttribute("data-artist") || "FX Harsono";
+
+          const isLiked = favBtn ? favBtn.classList.contains("liked") : false;
+          updateModalSaveButton(isLiked);
+
+          storyModal.classList.add("active");
+          storyModal.setAttribute("aria-hidden", "false");
+          document.body.style.overflow = "hidden";
+        });
+      });
+
+      function updateModalSaveButton(isLiked) {
+        modalSaveBtn.classList.toggle("liked", isLiked);
+        modalSaveText.textContent = isLiked
+          ? "SAVED TO MY EVENT TO DO"
+          : "SAVE TO MY EVENT TO DO";
+      }
+
+      modalSaveBtn.addEventListener("click", () => {
+        if (!activeCard) return;
+        const cardFavBtn = activeCard.querySelector(".favorite-btn");
+        if (!cardFavBtn) return;
+
+        cardFavBtn.classList.toggle("liked");
+        const isLiked = cardFavBtn.classList.contains("liked");
+        updateModalSaveButton(isLiked);
+
+        if (currentFilter === "favorite") {
+          applyFilter("favorite");
+        }
+      });
+
+      function closeModal() {
+        storyModal.classList.remove("active");
+        storyModal.setAttribute("aria-hidden", "true");
+        document.body.style.overflow = "";
+        activeCard = null;
+      }
+
+      storyModal.addEventListener("click", (e) => {
+        if (e.target === storyModal) {
+          closeModal();
+        }
+      });
+
+      document.addEventListener("keydown", (e) => {
+        if (e.key === "Escape" && storyModal.classList.contains("active")) {
+          closeModal();
+        }
+      });
+    });
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,851 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>JAVÈRA - Collection</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@300;400;500;600&display=swap"
+        rel="stylesheet">
+
+    <link rel="stylesheet" href="css/style.css" />
+
+    <!-- CSS KHUSUS MODAL POP-UP -->
+    <style>
+        .story-modal-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(18, 11, 7, 0.78);
+            backdrop-filter: blur(4px);
+            -webkit-backdrop-filter: blur(4px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 24px;
+            z-index: 9999;
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+            transition: opacity 0.28s ease, visibility 0.28s ease;
+        }
+
+        .story-modal-overlay.active {
+            opacity: 1;
+            visibility: visible;
+            pointer-events: auto;
+        }
+
+        .story-modal-card {
+            width: 100%;
+            max-width: 790px;
+            min-height: 460px;
+            max-height: 90vh;
+            background: #403126;
+            border: 1px solid rgba(220, 174, 82, 0.55);
+            display: grid;
+            grid-template-columns: 1.02fr 1fr;
+            box-shadow: 0 24px 64px rgba(0, 0, 0, 0.75);
+            overflow: hidden;
+            transform: translateY(14px) scale(0.98);
+            transition: transform 0.28s ease;
+        }
+
+        .story-modal-overlay.active .story-modal-card {
+            transform: translateY(0) scale(1);
+        }
+
+        .story-modal-image {
+            width: 100%;
+            height: 100%;
+            background: #2a1c14;
+            overflow: hidden;
+        }
+
+        .story-modal-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .story-modal-body {
+            padding: 28px 26px 24px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            overflow-y: auto;
+            text-align: left;
+        }
+
+        .story-modal-meta {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.68rem;
+            color: #dcae52;
+            margin-bottom: 6px;
+        }
+
+        .story-modal-title {
+            font-family: var(--font-serif, 'Playfair Display', serif);
+            font-size: 1.72rem;
+            font-weight: 500;
+            color: #dfcaa7;
+            line-height: 1.2;
+            margin-bottom: 8px;
+        }
+
+        .story-modal-subtitle {
+            font-size: 0.68rem;
+            line-height: 1.45;
+            color: #f5ede6;
+            margin-bottom: 14px;
+        }
+
+        .story-modal-divider {
+            width: 100%;
+            height: 1px;
+            background: rgba(220, 174, 82, 0.45);
+            margin-bottom: 14px;
+        }
+
+        .story-modal-section {
+            margin-bottom: 16px;
+        }
+
+        .story-modal-section h4 {
+            font-family: var(--font-sans, 'Plus Jakarta Sans', sans-serif);
+            font-size: 0.72rem;
+            font-weight: 600;
+            color: #ffffff;
+            margin-bottom: 6px;
+        }
+
+        .story-modal-section p {
+            font-size: 0.65rem;
+            line-height: 1.55;
+            color: #cfbeaf;
+        }
+
+        .artwork-info-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .artwork-info-list li {
+            font-size: 0.65rem;
+            line-height: 1.55;
+            color: #cfbeaf;
+        }
+
+        .artwork-info-list li strong {
+            color: #ffffff;
+            font-weight: 600;
+        }
+
+        .story-modal-actions {
+            margin-top: 12px;
+        }
+
+        .modal-save-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 14px;
+            background: transparent;
+            border: 1px solid #dcae52;
+            color: #dcae52;
+            font-family: var(--font-sans, 'Plus Jakarta Sans', sans-serif);
+            font-size: 0.62rem;
+            font-weight: 500;
+            letter-spacing: 0.4px;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: all 0.28s ease-in-out;
+        }
+
+        .modal-save-btn svg {
+            width: 15px;
+            height: 15px;
+            flex-shrink: 0;
+        }
+
+        .modal-save-btn:hover,
+        .modal-save-btn.liked {
+            background: rgba(220, 174, 82, 0.15);
+            color: #e6a64e;
+        }
+
+        .modal-save-btn.liked svg {
+            fill: #e6a64e;
+        }
+
+        @media (max-width: 768px) {
+            .story-modal-card {
+                grid-template-columns: 1fr;
+                max-height: 88vh;
+                overflow-y: auto;
+            }
+
+            .story-modal-image {
+                height: 230px;
+            }
+
+            .story-modal-body {
+                padding: 20px 18px;
+            }
+
+            .story-modal-title {
+                font-size: 1.4rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- NAVBAR -->
+    <nav class="navbar-wrapper">
+        <div class="navbar-capsule">
+            <a href="index.html" class="nav-item">Home</a>
+            <a href="explore.html" class="nav-item">Explore</a>
+            <a href="collection.html" class="nav-item active">Collection</a>
+            <a href="exhibition.html" class="nav-item">Art Exhibition</a>
+            <a href="quiz.html" class="nav-item">Cultural Quiz</a>
+        </div>
+    </nav>
+
+    <main class="collection-section">
+
+        <!-- HERO SECTION -->
+        <section class="collection-hero">
+            <h1 class="collection-title">A World of Art, Preserved.</h1>
+
+            <p class="collection-description">
+                A curated collection of Indonesia's finest artistic expressions,
+                from ancestral traditions to contemporary creations
+            </p>
+
+            <div class="collection-divider"></div>
+        </section>
+
+        <!-- FILTER CATEGORY -->
+        <section class="collection-filter">
+            <button class="filter-btn active" data-filter="all">All Works</button>
+            <button class="filter-btn" data-filter="textile">Textile & Pattern</button>
+            <button class="filter-btn" data-filter="performing">Performing Art</button>
+            <button class="filter-btn" data-filter="craft">Craft & Sculpture</button>
+            <button class="filter-btn" data-filter="architecture">Architecture</button>
+            <button class="filter-btn" data-filter="painting">Painting</button>
+            <button class="filter-btn" data-filter="favorite">My Collection</button>
+        </section>
+
+        <!-- ARTWORK GRID -->
+        <section class="artwork-grid" id="artworkGrid">
+
+            <!-- ARTWORK 1 -->
+            <article class="artwork-card" data-category="textile"
+                data-subtitle="Traditional batik from Cirebon, West Java"
+                data-about="Batik Megamendung is known for its flowing, cloud-shaped motifs rooted in Cirebon's artistic heritage and cultural exchange. Its blue tones symbolize calmness, patience, and serenity, while layered patterns reflect wisdom. Passed down through generations, it preserves Cirebon's identity and inspires contemporary design."
+                data-region-detail="Cirebon, West Java" data-artform="Traditional Textile"
+                data-technique="Wax-resist dyeing" data-material="Fabric and batik wax">
+                <div class="artwork-image">
+                    <img src="assets/images/collection-img.svg" alt="Batik Megamendung">
+                </div>
+                <div class="artwork-info">
+                    <div class="artwork-meta">
+                        <span class="meta-category">Textile & Pattern</span>
+                        <span class="meta-region">West Java</span>
+                    </div>
+                    <h3>Megamendung Batik</h3>
+                    <p>
+                        Batik Megamendung is a traditional batik from
+                        Cirebon, West Java, recognized for its distinctive
+                        cloud patterns.
+                    </p>
+                    <div class="artwork-footer">
+                        <a href="#" class="story-link">View Story ↗</a>
+                        <button class="favorite-btn" aria-label="Add to favorites">
+                            <svg viewBox="0 0 24 24" fill="none">
+                                <path
+                                    d="M20.8 8.8C20.8 13.2 12 19 12 19S3.2 13.2 3.2 8.8C3.2 4.5 8.5 3.2 12 7C15.5 3.2 20.8 4.5 20.8 8.8Z"
+                                    stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
+                                    stroke-linejoin="round" />
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+            </article>
+
+            <!-- ARTWORK 2 -->
+            <article class="artwork-card" data-category="textile"
+                data-subtitle="Traditional batik from Cirebon, West Java"
+                data-about="Batik Megamendung is known for its flowing, cloud-shaped motifs rooted in Cirebon's artistic heritage and cultural exchange. Its blue tones symbolize calmness, patience, and serenity, while layered patterns reflect wisdom. Passed down through generations, it preserves Cirebon's identity and inspires contemporary design."
+                data-region-detail="Cirebon, West Java" data-artform="Traditional Textile"
+                data-technique="Wax-resist dyeing" data-material="Fabric and batik wax">
+                <div class="artwork-image">
+                    <img src="assets/images/collection-img.svg" alt="Traditional Batik">
+                </div>
+                <div class="artwork-info">
+                    <div class="artwork-meta">
+                        <span class="meta-category">Textile & Pattern</span>
+                        <span class="meta-region">West Java</span>
+                    </div>
+                    <h3>Traditional Batik</h3>
+                    <p>
+                        A timeless textile tradition representing the
+                        creativity and cultural identity of Indonesian artisans.
+                    </p>
+                    <div class="artwork-footer">
+                        <a href="#" class="story-link">View Story ↗</a>
+                        <button class="favorite-btn" aria-label="Add to favorites">
+                            <svg viewBox="0 0 24 24" fill="none">
+                                <path
+                                    d="M20.8 8.8C20.8 13.2 12 19 12 19S3.2 13.2 3.2 8.8C3.2 4.5 8.5 3.2 12 7C15.5 3.2 20.8 4.5 20.8 8.8Z"
+                                    stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
+                                    stroke-linejoin="round" />
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+            </article>
+
+            <!-- ARTWORK 3 -->
+            <article class="artwork-card" data-category="textile"
+                data-subtitle="Traditional batik from Cirebon, West Java"
+                data-about="Batik Megamendung is known for its flowing, cloud-shaped motifs rooted in Cirebon's artistic heritage and cultural exchange. Its blue tones symbolize calmness, patience, and serenity, while layered patterns reflect wisdom. Passed down through generations, it preserves Cirebon's identity and inspires contemporary design."
+                data-region-detail="Cirebon, West Java" data-artform="Traditional Textile"
+                data-technique="Wax-resist dyeing" data-material="Fabric and batik wax">
+                <div class="artwork-image">
+                    <img src="assets/images/collection-img.svg" alt="Batik Art">
+                </div>
+                <div class="artwork-info">
+                    <div class="artwork-meta">
+                        <span class="meta-category">Textile & Pattern</span>
+                        <span class="meta-region">West Java</span>
+                    </div>
+                    <h3>Indonesian Batik</h3>
+                    <p>
+                        Traditional patterns that carry stories, values,
+                        and heritage passed down through generations.
+                    </p>
+                    <div class="artwork-footer">
+                        <a href="#" class="story-link">View Story ↗</a>
+                        <button class="favorite-btn" aria-label="Add to favorites">
+                            <svg viewBox="0 0 24 24" fill="none">
+                                <path
+                                    d="M20.8 8.8C20.8 13.2 12 19 12 19S3.2 13.2 3.2 8.8C3.2 4.5 8.5 3.2 12 7C15.5 3.2 20.8 4.5 20.8 8.8Z"
+                                    stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
+                                    stroke-linejoin="round" />
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+            </article>
+
+            <!-- ARTWORK 4 -->
+            <article class="artwork-card" data-category="textile"
+                data-subtitle="Traditional batik from Cirebon, West Java"
+                data-about="Batik Megamendung is known for its flowing, cloud-shaped motifs rooted in Cirebon's artistic heritage and cultural exchange. Its blue tones symbolize calmness, patience, and serenity, while layered patterns reflect wisdom. Passed down through generations, it preserves Cirebon's identity and inspires contemporary design."
+                data-region-detail="Cirebon, West Java" data-artform="Traditional Textile"
+                data-technique="Wax-resist dyeing" data-material="Fabric and batik wax">
+                <div class="artwork-image">
+                    <img src="assets/images/collection-img.svg" alt="Batik Pattern">
+                </div>
+                <div class="artwork-info">
+                    <div class="artwork-meta">
+                        <span class="meta-category">Textile & Pattern</span>
+                        <span class="meta-region">West Java</span>
+                    </div>
+                    <h3>Megamendung Pattern</h3>
+                    <p>
+                        An iconic cloud-inspired motif symbolizing calmness,
+                        patience, and wisdom.
+                    </p>
+                    <div class="artwork-footer">
+                        <a href="#" class="story-link">View Story ↗</a>
+                        <button class="favorite-btn" aria-label="Add to favorites">
+                            <svg viewBox="0 0 24 24" fill="none">
+                                <path
+                                    d="M20.8 8.8C20.8 13.2 12 19 12 19S3.2 13.2 3.2 8.8C3.2 4.5 8.5 3.2 12 7C15.5 3.2 20.8 4.5 20.8 8.8Z"
+                                    stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
+                                    stroke-linejoin="round" />
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+            </article>
+
+            <!-- ARTWORK 5 -->
+            <article class="artwork-card" data-category="textile"
+                data-subtitle="Traditional batik from Cirebon, West Java"
+                data-about="Batik Megamendung is known for its flowing, cloud-shaped motifs rooted in Cirebon's artistic heritage and cultural exchange. Its blue tones symbolize calmness, patience, and serenity, while layered patterns reflect wisdom. Passed down through generations, it preserves Cirebon's identity and inspires contemporary design."
+                data-region-detail="Cirebon, West Java" data-artform="Traditional Textile"
+                data-technique="Wax-resist dyeing" data-material="Fabric and batik wax">
+                <div class="artwork-image">
+                    <img src="assets/images/collection-img.svg" alt="Batik Collection">
+                </div>
+                <div class="artwork-info">
+                    <div class="artwork-meta">
+                        <span class="meta-category">Textile & Pattern</span>
+                        <span class="meta-region">West Java</span>
+                    </div>
+                    <h3>Heritage of Batik</h3>
+                    <p>
+                        A beautiful expression of local craftsmanship
+                        and Indonesia's rich textile heritage.
+                    </p>
+                    <div class="artwork-footer">
+                        <a href="#" class="story-link">View Story ↗</a>
+                        <button class="favorite-btn" aria-label="Add to favorites">
+                            <svg viewBox="0 0 24 24" fill="none">
+                                <path
+                                    d="M20.8 8.8C20.8 13.2 12 19 12 19S3.2 13.2 3.2 8.8C3.2 4.5 8.5 3.2 12 7C15.5 3.2 20.8 4.5 20.8 8.8Z"
+                                    stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
+                                    stroke-linejoin="round" />
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+            </article>
+
+            <!-- ARTWORK 6 -->
+            <article class="artwork-card" data-category="textile"
+                data-subtitle="Traditional batik from Cirebon, West Java"
+                data-about="Batik Megamendung is known for its flowing, cloud-shaped motifs rooted in Cirebon's artistic heritage and cultural exchange. Its blue tones symbolize calmness, patience, and serenity, while layered patterns reflect wisdom. Passed down through generations, it preserves Cirebon's identity and inspires contemporary design."
+                data-region-detail="Cirebon, West Java" data-artform="Traditional Textile"
+                data-technique="Wax-resist dyeing" data-material="Fabric and batik wax">
+                <div class="artwork-image">
+                    <img src="assets/images/collection-img.svg" alt="Batik Textile">
+                </div>
+                <div class="artwork-info">
+                    <div class="artwork-meta">
+                        <span class="meta-category">Textile & Pattern</span>
+                        <span class="meta-region">West Java</span>
+                    </div>
+                    <h3>Artisan's Creation</h3>
+                    <p>
+                        Handmade textile art reflecting the dedication
+                        of local Indonesian craftsmen.
+                    </p>
+                    <div class="artwork-footer">
+                        <a href="#" class="story-link">View Story ↗</a>
+                        <button class="favorite-btn" aria-label="Add to favorites">
+                            <svg viewBox="0 0 24 24" fill="none">
+                                <path
+                                    d="M20.8 8.8C20.8 13.2 12 19 12 19S3.2 13.2 3.2 8.8C3.2 4.5 8.5 3.2 12 7C15.5 3.2 20.8 4.5 20.8 8.8Z"
+                                    stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
+                                    stroke-linejoin="round" />
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+            </article>
+
+            <!-- ARTWORK 7 -->
+            <article class="artwork-card" data-category="textile"
+                data-subtitle="Traditional batik from Cirebon, West Java"
+                data-about="Batik Megamendung is known for its flowing, cloud-shaped motifs rooted in Cirebon's artistic heritage and cultural exchange. Its blue tones symbolize calmness, patience, and serenity, while layered patterns reflect wisdom. Passed down through generations, it preserves Cirebon's identity and inspires contemporary design."
+                data-region-detail="Cirebon, West Java" data-artform="Traditional Textile"
+                data-technique="Wax-resist dyeing" data-material="Fabric and batik wax">
+                <div class="artwork-image">
+                    <img src="assets/images/collection-img.svg" alt="Batik Artwork">
+                </div>
+                <div class="artwork-info">
+                    <div class="artwork-meta">
+                        <span class="meta-category">Textile & Pattern</span>
+                        <span class="meta-region">West Java</span>
+                    </div>
+                    <h3>Traditional Motifs</h3>
+                    <p>
+                        A collection of traditional motifs with unique
+                        meanings and cultural significance.
+                    </p>
+                    <div class="artwork-footer">
+                        <a href="#" class="story-link">View Story ↗</a>
+                        <button class="favorite-btn" aria-label="Add to favorites">
+                            <svg viewBox="0 0 24 24" fill="none">
+                                <path
+                                    d="M20.8 8.8C20.8 13.2 12 19 12 19S3.2 13.2 3.2 8.8C3.2 4.5 8.5 3.2 12 7C15.5 3.2 20.8 4.5 20.8 8.8Z"
+                                    stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
+                                    stroke-linejoin="round" />
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+            </article>
+
+            <!-- ARTWORK 8 -->
+            <article class="artwork-card" data-category="textile"
+                data-subtitle="Traditional batik from Cirebon, West Java"
+                data-about="Batik Megamendung is known for its flowing, cloud-shaped motifs rooted in Cirebon's artistic heritage and cultural exchange. Its blue tones symbolize calmness, patience, and serenity, while layered patterns reflect wisdom. Passed down through generations, it preserves Cirebon's identity and inspires contemporary design."
+                data-region-detail="Cirebon, West Java" data-artform="Traditional Textile"
+                data-technique="Wax-resist dyeing" data-material="Fabric and batik wax">
+                <div class="artwork-image">
+                    <img src="assets/images/collection-img.svg" alt="Indonesian Textile">
+                </div>
+                <div class="artwork-info">
+                    <div class="artwork-meta">
+                        <span class="meta-category">Textile & Pattern</span>
+                        <span class="meta-region">West Java</span>
+                    </div>
+                    <h3>Living Heritage</h3>
+                    <p>
+                        Preserving traditional artistry through generations
+                        of creative expression.
+                    </p>
+                    <div class="artwork-footer">
+                        <a href="#" class="story-link">View Story ↗</a>
+                        <button class="favorite-btn" aria-label="Add to favorites">
+                            <svg viewBox="0 0 24 24" fill="none">
+                                <path
+                                    d="M20.8 8.8C20.8 13.2 12 19 12 19S3.2 13.2 3.2 8.8C3.2 4.5 8.5 3.2 12 7C15.5 3.2 20.8 4.5 20.8 8.8Z"
+                                    stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
+                                    stroke-linejoin="round" />
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+            </article>
+
+        </section>
+
+        <!-- BATIK ORNAMENT -->
+        <div class="collection-ornament">
+            <svg viewBox="0 0 430 520" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <defs>
+                    <path id="outer-lobe" fill="#D4A349" d="
+        M -13,-13
+        C -20,-26 -14,-40 0,-50
+        C 14,-40 20,-26 13,-13
+        L 9,-17
+        C 12,-25 9,-34 0,-41
+        C -9,-34 -12,-25 -9,-17
+        Z
+      " />
+
+                    <path id="inner-seed" fill="#D4A349" d="
+        M 0,-7
+        C 4.5,-12 4.5,-21 0,-26
+        C -4.5,-21 -4.5,-12 0,-7
+        Z
+      " />
+
+                    <path id="star-petal" fill="#D4A349" d="
+        M 0,-11
+        C 5.5,-17 5.5,-29 0,-37
+        C -5.5,-29 -5.5,-17 0,-11
+        Z
+      " />
+
+                    <g id="batik-flower">
+
+                        <use href="#outer-lobe" />
+                        <use href="#outer-lobe" transform="rotate(90)" />
+                        <use href="#outer-lobe" transform="rotate(180)" />
+                        <use href="#outer-lobe" transform="rotate(270)" />
+                        <path fill="#D4A349" d="
+          M -13,-13 L 0,-16 L 13,-13 L 9,-17 L 0,-13.5 L -9,-17 Z
+          M 13,-13 L 16,0 L 13,13 L 17,9 L 13.5,0 L 17,-9 Z
+          M 13,13 L 0,16 L -13,13 L -9,17 L 0,13.5 L 9,17 Z
+          M -13,13 L -16,0 L -13,-13 L -17,-9 L -13.5,0 L -17,9 Z
+        " />
+
+                        <use href="#inner-seed" />
+                        <use href="#inner-seed" transform="rotate(90)" />
+                        <use href="#inner-seed" transform="rotate(180)" />
+                        <use href="#inner-seed" transform="rotate(270)" />
+                        <circle cx="0" cy="0" r="4.5" fill="#D4A349" />
+                    </g>
+
+
+                    <g id="batik-star">
+                        <use href="#star-petal" />
+                        <use href="#star-petal" transform="rotate(45)" />
+                        <use href="#star-petal" transform="rotate(90)" />
+                        <use href="#star-petal" transform="rotate(135)" />
+                        <use href="#star-petal" transform="rotate(180)" />
+                        <use href="#star-petal" transform="rotate(225)" />
+                        <use href="#star-petal" transform="rotate(270)" />
+                        <use href="#star-petal" transform="rotate(315)" />
+                        <circle cx="0" cy="0" r="7.5" fill="#D4A349" />
+                    </g>
+                </defs>
+
+                <!-- GRID -->
+                <use href="#batik-flower" x="60" y="60" />
+
+                <use href="#batik-star" x="110" y="110" />
+
+                <use href="#batik-flower" x="60" y="160" />
+                <use href="#batik-flower" x="160" y="160" />
+
+                <use href="#batik-star" x="110" y="210" />
+
+                <use href="#batik-flower" x="60" y="260" />
+                <use href="#batik-flower" x="160" y="260" />
+
+                <use href="#batik-star" x="110" y="310" />
+                <use href="#batik-star" x="210" y="310" />
+
+                <use href="#batik-flower" x="60" y="360" />
+                <use href="#batik-flower" x="160" y="360" />
+                <use href="#batik-flower" x="260" y="360" />
+
+                <use href="#batik-star" x="110" y="410" />
+                <use href="#batik-star" x="210" y="410" />
+                <use href="#batik-star" x="310" y="410" />
+
+                <use href="#batik-flower" x="60" y="460" />
+                <use href="#batik-flower" x="160" y="460" />
+                <use href="#batik-flower" x="260" y="460" />
+                <use href="#batik-flower" x="360" y="460" />
+            </svg>
+        </div>
+
+    </main>
+
+    <!-- STORY DETAIL MODAL (POP-UP) -->
+    <div class="story-modal-overlay" id="storyModal" aria-hidden="true">
+        <div class="story-modal-card" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+
+            <!-- Left: Artwork Image -->
+            <div class="story-modal-image">
+                <img src="assets/images/collection-img.svg" alt="Megamendung Batik" id="modalImg">
+            </div>
+
+            <!-- Right: Artwork Details -->
+            <div class="story-modal-body">
+                <div class="story-modal-top">
+                    <div class="story-modal-meta">
+                        <span id="modalCategory">Textile & Pattern</span>
+                        <span class="meta-dot">•</span>
+                        <span id="modalRegion">West Java</span>
+                    </div>
+
+                    <h2 class="story-modal-title" id="modalTitle">Megamendung Batik</h2>
+
+                    <p class="story-modal-subtitle" id="modalSubtitle">
+                        Traditional batik from Cirebon, West Java
+                    </p>
+
+                    <div class="story-modal-divider"></div>
+
+                    <div class="story-modal-section">
+                        <h4>About this art</h4>
+                        <p id="modalAbout">
+                            Batik Megamendung is known for its flowing, cloud-shaped motifs rooted in Cirebon's artistic
+                            heritage and cultural exchange. Its blue tones symbolize calmness, patience, and serenity,
+                            while layered patterns reflect wisdom. Passed down through generations, it preserves
+                            Cirebon's identity and inspires contemporary design.
+                        </p>
+                    </div>
+
+                    <div class="story-modal-section">
+                        <h4>Artwork Information</h4>
+                        <ul class="artwork-info-list">
+                            <li><strong>Region —</strong> <span id="modalInfoRegion">Cirebon, West Java</span></li>
+                            <li><strong>Art Form —</strong> <span id="modalInfoArtForm">Traditional Textile</span></li>
+                            <li><strong>Technique —</strong> <span id="modalInfoTechnique">Wax-resist dyeing</span></li>
+                            <li><strong>Material —</strong> <span id="modalInfoMaterial">Fabric and batik wax</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="story-modal-actions">
+                    <button class="modal-save-btn" id="modalSaveBtn" type="button">
+                        <svg viewBox="0 0 24 24" fill="none">
+                            <path
+                                d="M20.8 8.8C20.8 13.2 12 19 12 19S3.2 13.2 3.2 8.8C3.2 4.5 8.5 3.2 12 7C15.5 3.2 20.8 4.5 20.8 8.8Z"
+                                stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
+                                stroke-linejoin="round" />
+                        </svg>
+                        <span id="modalSaveText">SAVE TO MY COLLECTION</span>
+                    </button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- FOOTER -->
+    <footer class="main-footer collection-footer">
+        <div class="footer-overlay"></div>
+
+        <div class="footer-content">
+            <div class="footer-brand">
+                <span class="footer-tag">A Digital Museum of Java Island</span>
+                <h3 class="footer-title">Where Culture Lives Forever</h3>
+                <p class="footer-desc">
+                    A digital journey through Indonesia's art, heritage,
+                    and the stories that connect generations.
+                </p>
+            </div>
+
+            <div class="footer-copyright">
+                <p>&copy; 2026 JAVÈRA. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JAVASCRIPT LANGSUNG AGAR AMAN DI FILE:/// -->
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const filterButtons = document.querySelectorAll(".filter-btn");
+            const artworkCards = document.querySelectorAll(".artwork-card");
+            const storyModal = document.getElementById("storyModal");
+
+            const modalImg = document.getElementById("modalImg");
+            const modalCategory = document.getElementById("modalCategory");
+            const modalRegion = document.getElementById("modalRegion");
+            const modalTitle = document.getElementById("modalTitle");
+            const modalSubtitle = document.getElementById("modalSubtitle");
+            const modalAbout = document.getElementById("modalAbout");
+            const modalInfoRegion = document.getElementById("modalInfoRegion");
+            const modalInfoArtForm = document.getElementById("modalInfoArtForm");
+            const modalInfoTechnique = document.getElementById("modalInfoTechnique");
+            const modalInfoMaterial = document.getElementById("modalInfoMaterial");
+            const modalSaveBtn = document.getElementById("modalSaveBtn");
+            const modalSaveText = document.getElementById("modalSaveText");
+
+            let activeCard = null;
+            let currentFilter = "all";
+
+            // 1. FILTER KATEGORI
+            function applyFilter(filterValue) {
+                currentFilter = filterValue;
+                artworkCards.forEach((card) => {
+                    const category = card.getAttribute("data-category");
+                    const favBtn = card.querySelector(".favorite-btn");
+                    const isLiked = favBtn ? favBtn.classList.contains("liked") : false;
+
+                    if (filterValue === "all") {
+                        card.classList.remove("hidden");
+                    } else if (filterValue === "favorite") {
+                        card.classList.toggle("hidden", !isLiked);
+                    } else {
+                        card.classList.toggle("hidden", category !== filterValue);
+                    }
+                });
+            }
+
+            filterButtons.forEach((btn) => {
+                btn.addEventListener("click", () => {
+                    filterButtons.forEach((b) => b.classList.remove("active"));
+                    btn.classList.add("active");
+                    applyFilter(btn.getAttribute("data-filter"));
+                });
+            });
+
+            // 2. TOMBOL FAVORITE DI CARD
+            artworkCards.forEach((card) => {
+                const favBtn = card.querySelector(".favorite-btn");
+                if (!favBtn) return;
+
+                favBtn.addEventListener("click", (e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    favBtn.classList.toggle("liked");
+
+                    if (currentFilter === "favorite") {
+                        applyFilter("favorite");
+                    }
+                });
+            });
+
+            // 3. BUKA MODAL SAAT KLIK "VIEW STORY ↗"
+            artworkCards.forEach((card) => {
+                const storyLink = card.querySelector(".story-link");
+                if (!storyLink) return;
+
+                storyLink.addEventListener("click", (e) => {
+                    e.preventDefault();
+                    activeCard = card;
+
+                    const imgEl = card.querySelector(".artwork-image img");
+                    const metaSpans = card.querySelectorAll(".artwork-meta span");
+                    const titleEl = card.querySelector("h3");
+                    const descEl = card.querySelector("p");
+                    const favBtn = card.querySelector(".favorite-btn");
+
+                    const imgSrc = imgEl ? imgEl.getAttribute("src") : "";
+                    const imgAlt = imgEl ? imgEl.getAttribute("alt") : "";
+                    const category = metaSpans[0] ? metaSpans[0].textContent : "Textile & Pattern";
+                    const region = metaSpans[1] ? metaSpans[1].textContent : "West Java";
+                    const title = titleEl ? titleEl.textContent : "";
+                    const defaultDesc = descEl ? descEl.textContent.trim() : "";
+
+                    modalImg.src = imgSrc;
+                    modalImg.alt = imgAlt;
+                    modalCategory.textContent = category;
+                    modalRegion.textContent = region;
+                    modalTitle.textContent = title;
+                    modalSubtitle.textContent = card.getAttribute("data-subtitle") || defaultDesc;
+                    modalAbout.textContent = card.getAttribute("data-about") || defaultDesc;
+                    modalInfoRegion.textContent = card.getAttribute("data-region-detail") || region;
+                    modalInfoArtForm.textContent = card.getAttribute("data-artform") || "Traditional Textile";
+                    modalInfoTechnique.textContent = card.getAttribute("data-technique") || "Wax-resist dyeing";
+                    modalInfoMaterial.textContent = card.getAttribute("data-material") || "Fabric and batik wax";
+
+                    const isLiked = favBtn ? favBtn.classList.contains("liked") : false;
+                    updateModalSaveButton(isLiked);
+
+                    storyModal.classList.add("active");
+                    storyModal.setAttribute("aria-hidden", "false");
+                    document.body.style.overflow = "hidden";
+                });
+            });
+
+            // 4. SINKRONISASI TOMBOL SAVE DI MODAL
+            function updateModalSaveButton(isLiked) {
+                modalSaveBtn.classList.toggle("liked", isLiked);
+                modalSaveText.textContent = isLiked
+                    ? "SAVED TO MY COLLECTION"
+                    : "SAVE TO MY COLLECTION";
+            }
+
+            modalSaveBtn.addEventListener("click", () => {
+                if (!activeCard) return;
+                const cardFavBtn = activeCard.querySelector(".favorite-btn");
+                if (!cardFavBtn) return;
+
+                cardFavBtn.classList.toggle("liked");
+                const isLiked = cardFavBtn.classList.contains("liked");
+                updateModalSaveButton(isLiked);
+
+                if (currentFilter === "favorite") {
+                    applyFilter("favorite");
+                }
+            });
+
+            // 5. TUTUP MODAL (KLIK AREA GELAP / TEKAN ESC)
+            function closeModal() {
+                storyModal.classList.remove("active");
+                storyModal.setAttribute("aria-hidden", "true");
+                document.body.style.overflow = "";
+                activeCard = null;
+            }
+
+            storyModal.addEventListener("click", (e) => {
+                if (e.target === storyModal) {
+                    closeModal();
+                }
+            });
+
+            document.addEventListener("keydown", (e) => {
+                if (e.key === "Escape" && storyModal.classList.contains("active")) {
+                    closeModal();
+                }
+            });
+        });
+    </script>
+
+</body>
+
+</html>
