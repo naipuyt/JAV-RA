@@ -17,37 +17,45 @@
 
   <!-- Floating Capsule Navbar -->
   <nav class="navbar-wrapper">
-  <div class="navbar-capsule">
-    <a href="index.html" class="nav-item active">Home</a>
-    <a href="explore.html" class="nav-item">Explore</a>
-    <a href="collection.html" class="nav-item">Collection</a>
-    <a href="exhibition.html" class="nav-item">Art Exhibition</a>
-    <a href="quiz.html" class="nav-item">Cultural Quiz</a>
-  </div>
-</nav>
+    <div class="navbar-capsule">
+      <a href="index.html" class="nav-item active">Home</a>
+      <a href="explore.html" class="nav-item">Explore</a>
+      <a href="collection.html" class="nav-item">Collection</a>
+      <a href="exhibition.html" class="nav-item">Art Exhibition</a>
+      <a href="quiz.html" class="nav-item">Cultural Quiz</a>
+    </div>
+  </nav>
 
   <!-- 1. Hero Section --> 
   <main class="hero-section" id="home">
-    <!-- 4 Split Columns Background (Ganti <img> jadi <video> saat file lokal siap) -->
+    <!-- 4 Split Columns Background Video (Durasi 60 detik per loop) -->
     <div class="video-grid">
-      <!-- Kolom 1 -->
+      <!-- Kolom 1: Jawa Timur (detik 20 - 80) -->
       <div class="video-item">
-        <img src="https://images.unsplash.com/photo-1579783902614-a3fb3927b675?w=1000&auto=format&fit=crop&q=80" alt="Cultural Art 1" />
+        <video autoplay muted loop playsinline class="hero-video">
+          <source src="assets/videos/jatim.mp4#t=20,80" type="video/mp4" />
+        </video>
       </div>
 
-      <!-- Kolom 2 -->
+      <!-- Kolom 2: D.I. Yogyakarta (detik 22 - 82) -->
       <div class="video-item">
-        <img src="https://images.unsplash.com/photo-1582560475093-ba66accbc424?w=1000&auto=format&fit=crop&q=80" alt="Cultural Art 2" />
+        <video autoplay muted loop playsinline class="hero-video">
+          <source src="assets/videos/jogja.mp4#t=22,82" type="video/mp4" />
+        </video>
       </div>
 
-      <!-- Kolom 3 -->
+      <!-- Kolom 3: Jawa Barat (detik 16 - 76) -->
       <div class="video-item">
-        <img src="https://images.unsplash.com/photo-1607604276583-eef5d076aa5f?w=1000&auto=format&fit=crop&q=80" alt="Cultural Art 3" />
+        <video autoplay muted loop playsinline class="hero-video">
+          <source src="assets/videos/jabar.mp4#t=16,76" type="video/mp4" />
+        </video>
       </div>
 
-      <!-- Kolom 4 -->
+      <!-- Kolom 4: Keraton Yogyakarta / Jawa Tengah (detik 12 - 72) -->
       <div class="video-item">
-        <img src="https://images.unsplash.com/photo-1544717305-2782549b5136?w=1000&auto=format&fit=crop&q=80" alt="Cultural Art 4" />
+        <video autoplay muted loop playsinline class="hero-video">
+          <source src="assets/videos/keraton.mp4#t=12,72" type="video/mp4" />
+        </video>
       </div>
     </div>
 

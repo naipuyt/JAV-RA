@@ -3,19 +3,19 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>JAVÈRA - Explore 6 Provinces</title>
+  <title>Explore - JAVÈRA</title>
 
   <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
   <link rel="stylesheet" href="css/style.css"/>
   <link rel="icon" type="image/png" href="assets/images/favicon.png"/>
 </head>
-<body class="page-explore">
+<body>
 
-  <!-- Floating Capsule Navbar (Active di Explore) -->
+  <!-- Floating Capsule Navbar -->
   <nav class="navbar-wrapper">
     <div class="navbar-capsule">
       <a href="index.html" class="nav-item">Home</a>
@@ -26,66 +26,127 @@
     </div>
   </nav>
 
-  <!-- Main Explore Content -->
+  <!-- Explore Main Content -->
   <main class="explore-section">
-    <!-- Ornamen Batik Sudut Kiri Bawah -->
-    <div class="corner-batik-ornament">
-      <svg viewBox="0 0 200 350" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <path d="M100 20L120 50L100 80L80 50Z" stroke="#c99355" stroke-width="2"/>
-        <path d="M50 70L70 100L50 130L30 100Z" stroke="#c99355" stroke-width="2"/>
-        <path d="M150 70L170 100L150 130L130 100Z" stroke="#c99355" stroke-width="2"/>
-        <path d="M100 120L120 150L100 180L80 150Z" stroke="#c99355" stroke-width="2"/>
-        <path d="M50 170L70 200L50 230L30 200Z" stroke="#c99355" stroke-width="2"/>
-        <path d="M150 170L170 200L150 230L130 200Z" stroke="#c99355" stroke-width="2"/>
-        <path d="M100 220L120 250L100 280L80 250Z" stroke="#c99355" stroke-width="2"/>
-        <circle cx="100" cy="50" r="8" fill="#c99355" fill-opacity="0.2" stroke="#c99355"/>
-        <circle cx="50" cy="100" r="8" fill="#c99355" fill-opacity="0.2" stroke="#c99355"/>
-        <circle cx="150" cy="100" r="8" fill="#c99355" fill-opacity="0.2" stroke="#c99355"/>
-        <circle cx="100" cy="150" r="8" fill="#c99355" fill-opacity="0.2" stroke="#c99355"/>
-        <circle cx="50" cy="200" r="8" fill="#c99355" fill-opacity="0.2" stroke="#c99355"/>
-        <circle cx="150" cy="200" r="8" fill="#c99355" fill-opacity="0.2" stroke="#c99355"/>
-        <circle cx="100" cy="250" r="8" fill="#c99355" fill-opacity="0.2" stroke="#c99355"/>
-      </svg>
-    </div>
+    <!-- Ornamen Batik Vertikal di Kiri Bawah -->
+    <img src="assets/images/collections/batik.svg" alt="Batik Ornament" class="corner-batik-ornament" />
 
-    <!-- Header Section: 6 Province Endless Stories -->
-    <div class="explore-intro">
-      <div class="intro-left">
-        <h1 class="intro-title">6 Province<br>Endless Stories</h1>
-        <p class="intro-desc">
-          Journey through Java Island cultural landscape. Discover the art form, traditions, and creative voices that give every region its own identity.
-        </p>
-        <div class="intro-divider"></div>
-      </div>
-      <div class="intro-right">
-        <div class="intro-img-frame">
-          <img src="https://images.unsplash.com/photo-1596402184320-417e7178b2cd?w=900&auto=format&fit=crop&q=80" alt="Borobudur Temple" />
+    <div class="explore-container">
+      <!-- 1. Header Intro (2 Kolom) -->
+      <section class="explore-intro">
+        <div class="intro-text">
+          <h1 class="intro-title">6 Province<br>Endless Stories</h1>
+          <p class="intro-desc">
+            Journey through Java Island cultural landscape. Discover the art form, traditions, and creative voices that give every region its own identity.
+          </p>
         </div>
+        <div class="intro-img-frame">
+          <img src="https://images.unsplash.com/photo-1596402184320-417e7178b2cd?w=1000&auto=format&fit=crop&q=80" alt="Candi Borobudur Landscape" />
+        </div>
+      </section>
+
+      <!-- 2. Section Divider Title -->
+      <div class="region-section-header">
+        <div class="line"></div>
+        <h2 class="region-title">Explore by Region</h2>
+        <div class="line"></div>
       </div>
-    </div>
 
-    <!-- Sub Header: Explore by Region -->
-    <div class="region-section-header">
-      <div class="line"></div>
-      <h2 class="region-title">Explore by Region</h2>
-      <div class="line"></div>
-    </div>
+      <!-- 3. Grid 6 Kartu Provinsi (3x2) -->
+      <section class="provinces-grid">
+        <!-- Kartu 1: Banten -->
+        <article class="province-card">
+          <div class="province-img-wrap">
+            <img src="https://images.unsplash.com/photo-1588668214407-6ea9a6d8c272?w=800&auto=format&fit=crop&q=80" alt="Banten" />
+          </div>
+          <div class="province-body">
+            <h3 class="province-name">Banten</h3>
+            <p class="province-desc">
+              A land of rich traditions, home to the Baduy community and vibrant Rampak Bedug rhythms.
+            </p>
+          </div>
+        </article>
 
-    <!-- Grid 6 Kartu Provinsi (Di-render lewat js/main.js) -->
-    <div class="provinces-grid" id="provinces-container"></div>
+        <!-- Kartu 2: DKI Jakarta -->
+        <article class="province-card">
+          <div class="province-img-wrap">
+            <img src="https://images.unsplash.com/photo-1555899434-94d1368aa7af?w=800&auto=format&fit=crop&q=80" alt="DKI Jakarta" />
+          </div>
+          <div class="province-body">
+            <h3 class="province-name">DKI Jakarta</h3>
+            <p class="province-desc">
+              Indonesia's vibrant capital blends Betawi traditions with modern art, crafts, and performance.
+            </p>
+          </div>
+        </article>
+
+        <!-- Kartu 3: Jawa Barat -->
+        <article class="province-card">
+          <div class="province-img-wrap">
+            <img src="https://images.unsplash.com/photo-1570789210967-2cac24afeb00?w=800&auto=format&fit=crop&q=80" alt="Jawa Barat" />
+          </div>
+          <div class="province-body">
+            <h3 class="province-name">Jawa Barat</h3>
+            <p class="province-desc">
+              Celebrated for Sundanese art, angklung music, traditional dance, and batik.
+            </p>
+          </div>
+        </article>
+
+        <!-- Kartu 4: Jawa Tengah -->
+        <article class="province-card">
+          <div class="province-img-wrap">
+            <img src="https://images.unsplash.com/photo-1596402184320-417e7178b2cd?w=800&auto=format&fit=crop&q=80" alt="Jawa Tengah" />
+          </div>
+          <div class="province-body">
+            <h3 class="province-name">Jawa Tengah</h3>
+            <p class="province-desc">
+              Java's cultural heartland, celebrated for dance, gamelan music, batik, and timeless artistry.
+            </p>
+          </div>
+        </article>
+
+        <!-- Kartu 5: D.I. Yogyakarta -->
+        <article class="province-card">
+          <div class="province-img-wrap">
+            <img src="https://images.unsplash.com/photo-1584810359583-96fc3448beaa?w=800&auto=format&fit=crop&q=80" alt="Daerah Istimewa Yogyakarta" />
+          </div>
+          <div class="province-body">
+            <h3 class="province-name">Daerah Istimewa Yogyakarta</h3>
+            <p class="province-desc">
+              A vibrant hub of Javanese heritage, wayang, traditional crafts, and contemporary art.
+            </p>
+          </div>
+        </article>
+
+        <!-- Kartu 6: Jawa Timur -->
+        <article class="province-card">
+          <div class="province-img-wrap">
+            <img src="https://images.unsplash.com/photo-1518548419970-58e3b4079ab2?w=800&auto=format&fit=crop&q=80" alt="Jawa Timur" />
+          </div>
+          <div class="province-body">
+            <h3 class="province-name">Jawa Timur</h3>
+            <p class="province-desc">
+              Known for Reog Ponorogo, bold performances, and distinctive local crafts.
+            </p>
+          </div>
+        </article>
+      </section>
+    </div>
   </main>
 
-  <!-- Footer Section -->
+  <!-- Footer -->
   <footer class="main-footer">
-    <div class="footer-overlay"></div>
     <div class="footer-content">
-      <div class="footer-brand">
+      <div class="footer-left">
         <span class="footer-tag">A Digital Museum of Java Island</span>
-        <h3 class="footer-title">Where Culture Lives Forever</h3>
-        <p class="footer-desc">A digital journey through Indonesia's art, heritage, and the stories that connect generations.</p>
+        <h2 class="footer-title">Where Culture Lives Forever</h2>
+        <p class="footer-desc">
+          A digital journey through Indonesia's art, heritage, and the stories that connect generations.
+        </p>
       </div>
-      <div class="footer-copyright">
-        <p>&copy; 2026 JAVÈRA. All rights reserved.</p>
+      <div class="footer-right">
+        <p class="footer-copyright">© 2026 JAVÈRA. All rights reserved.</p>
       </div>
     </div>
   </footer>
